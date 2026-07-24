@@ -5,7 +5,8 @@ gcc xxx.c -o xxx.exe
 3.终端输出中文为乱码
 解决方法一：#include <windows.h>
           int main(){
-            SetConsoleOutputCp(65001);
+            SetConsoleOutputCP(65001);   为了让输出中文正常
+            SetConsoleCP(65001）;          为了让输入中文正常
           }
 解决方法二：在终端输入chcp 65001
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
