@@ -10,4 +10,12 @@ gcc xxx.c -o xxx.exe
           }
 解决方法二：在终端输入chcp 65001
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-解决方法三：叫ai配置好runcode插件 一键编译运行而且中文显示正常
+解决方法三：项目级配置runcode插件一键编译运行且中文显示正常 新建项目文件夹时新建子文件夹.vscode 在其里面新建settings.json复制
+代码：{
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt -Wall && chcp 65001 && $dir$fileNameWithoutExt"
+    }
+}
