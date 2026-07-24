@@ -1,0 +1,12 @@
+1.vscode要用管理员身份运行 否则编译会失败
+2.在终端编译运行的命令：
+gcc xxx.c -o xxx.exe
+.\xxx.exe
+3.终端输出中文为乱码
+解决方法一：#include <windows.h>
+          int main(){
+            SetConsoleOutputCp(65001);
+          }
+解决方法二：在终端输入chcp 65001
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+解决方法三：叫ai配置好runcode插件 一键编译运行而且中文显示正常
