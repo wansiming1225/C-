@@ -1,7 +1,9 @@
 1.vscode要用管理员身份运行 否则编译会失败
+
 2.在终端编译运行的命令：
 gcc xxx.c -o xxx.exe
 .\xxx.exe
+
 3.终端输出中文为乱码
 解决方法一：#include <windows.h>
           int main(){
@@ -19,3 +21,30 @@ gcc xxx.c -o xxx.exe
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt -Wall && chcp 65001 && $dir$fileNameWithoutExt"
     }
 }
+
+4.关于scanf
+(1)%d %f %s会跳过前导空白
+例：scanf（“%d%d”，&a，&b）；
+输入：1 2
+           1      2    
+都是可以正确读入的
+（2）%c不会跳过空格，在%c前加上空格可以显示跳过空格
+例：scanf（“%c”，&ch）；
+输入：       a
+只会读到空格
+    scanf（“ %c”，&ch）；
+输入：       a
+可以读到a
+（3）空白字符表示匹配任意的空白字符
+scanf（“%d %d ”，&a，&b）//因为第二个%d后面跟了一个空格 所以在没读到第三个非空白字符前没法输入
+输入：    a        b        c//读出a b
+（4）普通字符必须原样照抄
+例：scanf（“a+b=%d”，&c）
+输入a+b=10
+（5）输入字符串不用& %S遇到空白就停
+例：scanf（“%s”，s）；
+输入：hello world
+只能读到hello
+（6）scanf返回值是读取成功并赋值的变量个数
+（7）用fgets来得到带有空格的字符串
+fgets（s，sizeof（s），stdin）
